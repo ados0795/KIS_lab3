@@ -1,0 +1,28 @@
+type: object
+required:
+  - title
+  - price
+properties:
+  id:
+    description: Expansion pack identifier
+    readOnly: true
+    type: integer
+  title:
+    description: Expansion pack title
+    type: string
+    maxLength: 255
+  description:
+    description: Expansion pack description
+    type: string
+  price:
+    description: Expansion pack price
+    type: number
+    example: 499.99
+  logo:
+    description: Expansion pack logo
+    type: string
+    example: gta5-expansion.jpeg
+  game:
+    description: Game which contains this add-on
+    allOf:
+      - $ref: ./Game.yaml

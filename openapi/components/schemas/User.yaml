@@ -1,0 +1,33 @@
+type: object
+required:
+  - name
+  - email
+  - password
+properties:
+  id:
+    description: User identifier
+    readOnly: true
+    type: integer
+  name:
+    description: Username
+    type: string
+    maxLength: 255
+  password:
+    description: The token's password
+    type: string
+    format: password
+    writeOnly: true
+  phoneNumbers:
+    description: The phone value
+    type: string
+    example: 123-456-789
+  email:
+    description: The email value
+    type: string
+    example: bely@rambler.ru
+  library:
+    description: Downloaded games
+    type: array
+    items:
+      allOf:
+        - $ref: ./Game.yaml

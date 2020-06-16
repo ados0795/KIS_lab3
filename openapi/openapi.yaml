@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: STEAM API
+  contact:
+    name: Alexander Bely
+    email: email
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: User
+    description: |
+      Methods for users
+  - name: Game
+    description: |
+      Methods for games
+  - name: Expansion
+    description: |
+      Methods for expansion packs
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /users:
+    $ref: ./paths/users.yaml
+  /user/{id}:
+    $ref: ./paths/user@{id}.yaml
+  /games:
+    $ref: ./paths/games.yaml
+  /game/{id}:
+    $ref: ./paths/game@{id}.yaml
+  /games/{userId}:
+    $ref: ./paths/games@{userId}.yaml
+  /expansions:
+    $ref: ./paths/expansions.yaml
+  /expansion/{id}:
+    $ref: ./paths/expansion@{id}.yaml
+  /expansions/{gameId}:
+    $ref: ./paths/expansions@{gameId}.yaml

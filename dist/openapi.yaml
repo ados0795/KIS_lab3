@@ -1,0 +1,458 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: STEAM API
+  contact:
+    name: Alexander Bely
+    email: email
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: User
+    description: |
+      Methods for users
+  - name: Game
+    description: |
+      Methods for games
+  - name: Expansion
+    description: |
+      Methods for expansion packs
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /users:
+    get:
+      tags:
+        - User
+      summary: Получить информацию о пользователях
+      operationId: GetUsers
+      description: |
+        Получить информацию о пользователях
+      responses:
+        '200':
+          description: Информация о пользователях была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - User
+      summary: Добавить нового пользователя
+      operationId: PostUser
+      description: |
+        Добавить нового пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Пользователь был успешно добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/user/{id}':
+    get:
+      tags:
+        - User
+      summary: Получить пользователя по ID
+      operationId: GetUser
+      description: |
+        Получить информацию о пользователе по ID
+      responses:
+        '200':
+          description: Информация о пользователе успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    patch:
+      tags:
+        - User
+      summary: Изменить пользователя по ID
+      operationId: PatchUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Пользователь был изменен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '409':
+          description: Пользователь существует и не может быть обновлен
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - User
+      summary: Удалить пользователя по ID
+      operationId: DeleteUser
+      description: |
+        Удалить пользователя по ID
+      responses:
+        '204':
+          description: Пользователь был удален
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не можеть быть удален
+        '404':
+          description: Не найдено
+  /games:
+    get:
+      tags:
+        - Game
+      summary: Получить информацию об играх
+      operationId: GetGames
+      description: |
+        Получить информацию об играх
+      responses:
+        '200':
+          description: Информация о играх была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Game
+      summary: Добавить новую игру
+      operationId: PostGame
+      description: |
+        Добавить новую игру
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Игра была успешно добавлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/game/{id}':
+    get:
+      tags:
+        - Game
+      summary: Получить игру по ID
+      operationId: GetGame
+      description: |
+        Получить информацию об игре по ID
+      responses:
+        '200':
+          description: Информация об игре успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    patch:
+      tags:
+        - Game
+      summary: Изменить игру по ID
+      operationId: PatchGame
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '201':
+          description: Игра была изменена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '409':
+          description: Игра существует и не может быть обновлена
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Game
+      summary: Удалить игру по ID
+      operationId: DeleteGame
+      description: |
+        Удалить игру по ID
+      responses:
+        '204':
+          description: Игра была удалена
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не можеть быть удален
+        '404':
+          description: Не найдено
+  '/games/{userId}':
+    get:
+      tags:
+        - Game
+      summary: Получить игры пользователя по его ID
+      operationId: GetUserGames
+      description: |
+        Получить игры пользователя по его ID
+      responses:
+        '200':
+          description: Информация о играх была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        '401':
+          description: Отказано в доступе
+  /expansions:
+    get:
+      tags:
+        - Expansion
+      summary: Получить информацию о дополнениях
+      operationId: GetExpansions
+      description: |
+        Получить информацию о дополнениях
+      responses:
+        '200':
+          description: Информация о дополнениях была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpansionPack'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Expansion
+      summary: Добавить новое дополнение
+      operationId: PostExpansion
+      description: |
+        Добавить новое дополнение
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpansionPack'
+      responses:
+        '200':
+          description: Дополнение было успешно добавлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpansionPack'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/expansion/{id}':
+    get:
+      tags:
+        - Expansion
+      summary: Получить дополнение по ID
+      operationId: GetExpansion
+      description: |
+        Получить информацию о дополнении по ID
+      responses:
+        '200':
+          description: Информация о дополнении успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpansionPack'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    patch:
+      tags:
+        - Expansion
+      summary: Изменить дополнение по ID
+      operationId: PatchExpansion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpansionPack'
+      responses:
+        '201':
+          description: Дополнение было изменено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpansionPack'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '409':
+          description: Дополнение существует и не может быть обновлено
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Expansion
+      summary: Удалить дополнение по ID
+      operationId: DeleteExpansion
+      description: |
+        Удалить дополнение по ID
+      responses:
+        '204':
+          description: Дополнение было удалено
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не можеть быть удален
+        '404':
+          description: Не найдено
+  '/expansions/{gameId}':
+    get:
+      tags:
+        - Expansion
+      summary: Получить все дополнения игры по его ID
+      operationId: GetGameExpansions
+      description: |
+        Получить все дополнения игры по его ID
+      responses:
+        '200':
+          description: Информация о дополнениях была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpansionPack'
+        '401':
+          description: Отказано в доступе
+components:
+  schemas:
+    Game:
+      type: object
+      required:
+        - title
+        - price
+      properties:
+        id:
+          description: Game identifier
+          readOnly: true
+          type: integer
+        title:
+          description: Game title
+          type: string
+          maxLength: 255
+        description:
+          description: Game description
+          type: string
+        price:
+          description: Game price
+          type: number
+          example: 499.99
+        logo:
+          description: Game logo
+          type: string
+          example: gta5.jpeg
+    User:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        id:
+          description: User identifier
+          readOnly: true
+          type: integer
+        name:
+          description: Username
+          type: string
+          maxLength: 255
+        password:
+          description: The token's password
+          type: string
+          format: password
+          writeOnly: true
+        phoneNumbers:
+          description: The phone value
+          type: string
+          example: 123-456-789
+        email:
+          description: The email value
+          type: string
+          example: bely@rambler.ru
+        library:
+          description: Downloaded games
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/Game'
+    ExpansionPack:
+      type: object
+      required:
+        - title
+        - price
+      properties:
+        id:
+          description: Expansion pack identifier
+          readOnly: true
+          type: integer
+        title:
+          description: Expansion pack title
+          type: string
+          maxLength: 255
+        description:
+          description: Expansion pack description
+          type: string
+        price:
+          description: Expansion pack price
+          type: number
+          example: 499.99
+        logo:
+          description: Expansion pack logo
+          type: string
+          example: gta5-expansion.jpeg
+        game:
+          description: Game which contains this add-on
+          allOf:
+            - $ref: '#/components/schemas/Game'

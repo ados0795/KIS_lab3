@@ -1,0 +1,18 @@
+get:
+  tags:
+    - Expansion
+  summary: Получить все дополнения игры по его ID
+  operationId: GetGameExpansions
+  description: |
+    Получить все дополнения игры по его ID
+  responses:
+    '200':
+      description: Информация о дополнениях была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/ExpansionPack.yaml
+    '401':
+      description: Отказано в доступе

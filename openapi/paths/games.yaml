@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Game
+  summary: Получить информацию об играх
+  operationId: GetGames
+  description: |
+    Получить информацию об играх
+  responses:
+    '200':
+      description: Информация о играх была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Game.yaml
+    '401':
+      description: Отказано в доступе
+post:
+  tags:
+    - Game
+  summary: Добавить новую игру
+  operationId: PostGame
+  description: |
+    Добавить новую игру
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Game.yaml
+  responses:
+    '200':
+      description: Игра была успешно добавлена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Game.yaml
+    '401':
+      description: Отказано в доступе
+    '422':
+      description: Неверные данные

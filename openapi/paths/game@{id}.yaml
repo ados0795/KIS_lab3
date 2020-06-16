@@ -1,0 +1,59 @@
+get:
+  tags:
+    - Game
+  summary: Получить игру по ID
+  operationId: GetGame
+  description: |
+    Получить информацию об игре по ID
+  responses:
+    '200':
+      description: Информация об игре успешно получена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Game.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+patch:
+  tags:
+    - Game
+  summary: Изменить игру по ID
+  operationId: PatchGame
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Game.yaml
+  responses:
+    '201':
+      description: Игра была изменена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Game.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+    '409':
+      description: Игра существует и не может быть обновлена
+    '422':
+      description: Неверные данные
+delete:
+  tags:
+    - Game
+  summary: Удалить игру по ID
+  operationId: DeleteGame
+  description: |
+    Удалить игру по ID
+  responses:
+    '204':
+      description: Игра была удалена
+    '401':
+      description: Отказано в доступе
+    '402':
+      description: Не можеть быть удален
+    '404':
+      description: Не найдено

@@ -1,0 +1,24 @@
+type: object
+required:
+  - title
+  - price
+properties:
+  id:
+    description: Game identifier
+    readOnly: true
+    type: integer
+  title:
+    description: Game title
+    type: string
+    maxLength: 255
+  description:
+    description: Game description
+    type: string
+  price:
+    description: Game price
+    type: number
+    example: 499.99
+  logo:
+    description: Game logo
+    type: string
+    example: gta5.jpeg

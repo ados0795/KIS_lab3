@@ -1,0 +1,59 @@
+get:
+  tags:
+    - Expansion
+  summary: Получить дополнение по ID
+  operationId: GetExpansion
+  description: |
+    Получить информацию о дополнении по ID
+  responses:
+    '200':
+      description: Информация о дополнении успешно получена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ExpansionPack.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+patch:
+  tags:
+    - Expansion
+  summary: Изменить дополнение по ID
+  operationId: PatchExpansion
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ExpansionPack.yaml
+  responses:
+    '201':
+      description: Дополнение было изменено
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ExpansionPack.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+    '409':
+      description: Дополнение существует и не может быть обновлено
+    '422':
+      description: Неверные данные
+delete:
+  tags:
+    - Expansion
+  summary: Удалить дополнение по ID
+  operationId: DeleteExpansion
+  description: |
+    Удалить дополнение по ID
+  responses:
+    '204':
+      description: Дополнение было удалено
+    '401':
+      description: Отказано в доступе
+    '402':
+      description: Не можеть быть удален
+    '404':
+      description: Не найдено

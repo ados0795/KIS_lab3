@@ -1,0 +1,18 @@
+get:
+  tags:
+    - Game
+  summary: Получить игры пользователя по его ID
+  operationId: GetUserGames
+  description: |
+    Получить игры пользователя по его ID
+  responses:
+    '200':
+      description: Информация о играх была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Game.yaml
+    '401':
+      description: Отказано в доступе

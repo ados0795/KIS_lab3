@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Expansion
+  summary: Получить информацию о дополнениях
+  operationId: GetExpansions
+  description: |
+    Получить информацию о дополнениях
+  responses:
+    '200':
+      description: Информация о дополнениях была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/ExpansionPack.yaml
+    '401':
+      description: Отказано в доступе
+post:
+  tags:
+    - Expansion
+  summary: Добавить новое дополнение
+  operationId: PostExpansion
+  description: |
+    Добавить новое дополнение
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ExpansionPack.yaml
+  responses:
+    '200':
+      description: Дополнение было успешно добавлено
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ExpansionPack.yaml
+    '401':
+      description: Отказано в доступе
+    '422':
+      description: Неверные данные
